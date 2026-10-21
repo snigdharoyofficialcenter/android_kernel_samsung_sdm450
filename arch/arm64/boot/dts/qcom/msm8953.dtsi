@@ -138,6 +138,7 @@
 
 		adsp_shmem_device_mem: adsp_shmem_device_region@0xc0100000 {
 			compatible = "shared-dma-pool";
+			label = "adsp_shmem_device_mem";
 			reusable;
 			alloc-ranges = <0x0 0xc0100000 0x0 0x08200000>;
 			alignment = <0 0x400000>;
@@ -170,6 +171,7 @@
 
 	aliases {
 		/* smdtty devices */
+		smd0 = &smdtty_ds;
 		smd1 = &smdtty_apps_fm;
 		smd2 = &smdtty_apps_riva_bt_acl;
 		smd3 = &smdtty_apps_riva_bt_cmd;
@@ -987,14 +989,18 @@
 			< 1036800000 2>,
 			< 1401600000 3>,
 			< 1689600000 4>,
-			< 1804800000 5>;
+			< 1804800000 5>,
+           < 1958400000 6>,
+           < 2016000000 7>;
 		qcom,speed6-bin-v0-cci =
 			<          0 0>,
 			<  261120000 1>,
 			<  414720000 2>,
 			<  560640000 3>,
 			<  675840000 4>,
-			<  721920000 5>;
+			<  721920000 5>,
+            <  783360000 6>,
+            <  806400000 7>;
 		#clock-cells = <1>;
 	 };
 
@@ -1202,6 +1208,11 @@
 
 	qcom,smdtty {
 		compatible = "qcom,smdtty";
+
+		smdtty_ds: qcom,smdtty-ds {
+			qcom,smdtty-remote = "modem";
+			qcom,smdtty-port-name = "DS";
+		};
 
 		smdtty_apps_fm: qcom,smdtty-apps-fm {
 			qcom,smdtty-remote = "wcnss";
